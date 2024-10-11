@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Weather in Manado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="weather" class="weather-content animated">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ weather.name }}</ion-card-title>
+        <ion-card-subtitle>{{ weather.weather[0].description | titlecase }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="weather-container">
+          <img [src]="getWeatherIconUrl(weather.weather[0].icon)" alt="Weather icon">
+          <h2>{{ weather.main.temp }}°C</h2>
+        </div>
+        <div class="additional-info">
+          <ion-icon name="water" slot="start"></ion-icon>
+          <p>Humidity: {{ weather.main.humidity }}%</p>
+        </div>
+        <div class="additional-info">
+          <ion-icon name="speedometer" slot="start"></ion-icon>
+          <p>Wind Speed: {{ weather.wind.speed }} m/s</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-spinner *ngIf="!weather"></ion-spinner>
+</ion-content>
+
+<style>
+  ion-header {
+    --background: linear-gradient(to right, #4facfe, #00f2fe);
+    --color: white;
+  }
+
+  ion-content {
+    --background: linear-gradient(to top, #00c6ff, #0072ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100%;
+  }
+
+  .weather-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .weather-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .weather-container img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+
+  .weather-container h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .additional-info {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .additional-info ion-icon {
+    font-size: 1.8rem;
+    margin-right: 10px;
+    color: #fff;
+  }
+
+  ion-card {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    text-align: center;
+  }
+
+  ion-card-title {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  ion-card-subtitle {
+    font-size: 1rem;
+    color: #dcdcdc;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  ion-card-content {
+    padding: 20px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
